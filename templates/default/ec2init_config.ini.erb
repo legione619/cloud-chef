@@ -1,0 +1,16 @@
+[general]
+installation_dir = <%= node['cloud']['init']['install_dir'] %>/ec2init
+log_level = DEBUG
+kagent_conf_dir = <%= node["kagent"]["etc"] %>
+certs_dir = <%= node['certs']['dir'] %>
+unmanaged = <%= node['cloud']['init']['config']['unmanaged'] %>
+
+[executor]
+max_procedure_retry = 5
+skip_report = <%= node['cloud']['init']['config']['dev'] %>
+
+[initplan]
+hosted_zone = <%= node['cloud']['init']['config']['hosted_zone'] %>
+lets_encrypt_dir = <%= node['cloud']['init']['config']['lets_encrypt_dir'] %>
+gpu_driver_url = <%= node['cloud']['init']['gpu']['driver_url'] %>
+nvidia_pkgs_url = <%= node['cloud']['init']['gpu']['pkgs_url'] %>
