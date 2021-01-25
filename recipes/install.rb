@@ -1,3 +1,5 @@
+require 'securerandom'
+
 directory "#{node['cloud']['init']['install_dir']}/ec2init" do
   owner "root"
   group "root"
@@ -58,6 +60,22 @@ when "debian"
     EOF
   end
   systemd_directory = "/lib/systemd/system"
+
+  filename = File.basename(node['cloud']['cloudwatch']['download_url'])
+  remote_file "#{Chef::Config['file_cache_path']}/#{filename}" do
+    source node['cloud']['cloudwatch']['download_url']
+    user 'root'
+    group 'root'
+    mode 0500
+    action :create
+    only_if { node['cloud']['collect_logs'].casecmp?("true") && node['install']['cloud'].casecmp?("aws")}
+    notifies :install, 'dpkg_package[amazon-cloudwatch-agent]'
+  end
+  
+  dpkg_package "amazon-cloudwatch-agent" do
+    source "#{Chef::Config['file_cache_path']}/#{filename}"
+    action :nothing
+  end
 when "rhel"
   package "epel-release"
   systemd_directory = "/usr/lib/systemd/system"
@@ -79,6 +97,9 @@ if node['cloud']['init']['config']['unmanaged'].casecmp?("true")
     user 'root'
     group 'root'
     mode 0500
+    variables({
+      :nonce => SecureRandom.hex[0...10]
+    })
   end
   
   template "#{systemd_directory}/unmanaged-ec2init.service" do

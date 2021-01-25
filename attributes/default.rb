@@ -2,7 +2,7 @@ include_attribute 'tensorflow'
 include_attribute 'hops'
 
 default['cloud']['init']['install_dir']                    = '/root'
-default['cloud']['init']['version']                        = '0.6'
+default['cloud']['init']['version']                        = '0.7'
 
 default['cloud']['init']['config']['hosted_zone']          = "cloud.hopsworks.ai"
 default['cloud']['init']['config']['lets_encrypt_dir']     = "/etc/letsencrypt"
@@ -16,3 +16,7 @@ default['cloud']['init']['docker']['ecr-login']['url']     = "#{node['download_u
 
 default['cloud']['init']['gpu']['driver_url']              = node['nvidia']['driver_url']
 default['cloud']['init']['gpu']['pkgs_url']                = node['hops']['nvidia_pkgs']['download_url']
+
+default['cloud']['collect_logs']                           = "true"
+default['cloud']['cloudwatch']['agent_version']            = "1.247346.1b249759"
+default['cloud']['cloudwatch']['download_url']             = "https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/#{node['cloud']['cloudwatch']['agent_version']}/amazon-cloudwatch-agent.deb"
