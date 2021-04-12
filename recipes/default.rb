@@ -131,7 +131,6 @@ if node['install']['cloud'].casecmp?("aws")
   end
 end  
 
-
 if node['install']['cloud'].casecmp?("azure")
   remote_file "/tmp/install-az.sh" do
     source 'https://aka.ms/InstallAzureCLIDeb'

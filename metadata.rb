@@ -50,6 +50,14 @@ attribute "cloud/init/docker/ecr-login/url",
           :description => "Download url for Amazon ECR Credential Helper",
           :type => 'string'
 
+attribute "cloud/init/rondb/total_memory_config_multiplier",
+          :description => "System available memory to RonDB TotalMemoryConfig multiplier. Default: 0.1",
+          :type => 'string'
+
+attribute "cloud/init/rondb/num_cpus_multiplier",
+          :description => "System cores to RonDB NumCPUs multiplier. Default: 0.4",
+          :type => 'string'
+
 attribute "cloud/collect_logs",
           :description => "Flag to enable collecting logs on the Cloud. Default: true",
           :type => 'string'
@@ -60,4 +68,12 @@ attribute "cloud/cloudwatch/agent_version",
 
 attribute "cloud/cloudwatch/download_url",
           :description => "Download URL for CloudWatch agent",
+          :type => 'string'
+
+attribute "cloud/ndb-agent/version",
+          :description => "Version of ndb-agent",
+          :type => 'string'
+
+attribute "cloud/ndb-agent/log-level",
+          :description => "Log level of ndb-agent",
           :type => 'string'
