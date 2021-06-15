@@ -1,0 +1,32 @@
+[general]
+installation_dir = <%= node['cloud']['init']['install_dir'] %>/ec2init
+log_level = DEBUG
+kagent_conf_dir = <%= node["kagent"]["etc"] %>
+certs_dir = <%= node['certs']['dir'] %>
+unmanaged = <%= node['cloud']['init']['config']['unmanaged'] %>
+
+[executor]
+max_procedure_retry = 5
+skip_report = <%= node['cloud']['init']['config']['dev'] %>
+
+[initplan]
+hosted_zone = <%= node['cloud']['init']['config']['hosted_zone'] %>
+lets_encrypt_dir = <%= node['cloud']['init']['config']['lets_encrypt_dir'] %>
+gpu_driver_url = <%= node['cloud']['init']['gpu']['driver_url'] %>
+nvidia_pkgs_url = <%= node['cloud']['init']['gpu']['pkgs_url'] %>
+hops_data_dir = <%= node['hops']['data_dir'] %>
+default_registry_url= registry.service.consul:<%= node['hops']['docker']['registry']['port'] %>
+python_image_name= <%= node['hops']['docker']['base']['image']['python']['name'] %>
+rondb_total_memory_config_multiplier = <%= node['cloud']['init']['rondb']['total_memory_config_multiplier'] %>
+rondb_num_cpus_multiplier = <%= node['cloud']['init']['rondb']['num_cpus_multiplier'] %>
+onlinefs_username = <%= node['onlinefs']['hopsworks']['email'] %>
+onlinefs_token_file = <%= node['onlinefs']['token'] %>
+
+[upgradeplan]
+hops_versions = <%= node['hops']['versions']%>,<%= node['hops']['version'].sub("-SNAPSHOT", "").split("-")[0]%>
+hopsworks_versions = <%= node['hopsworks']['versions']%>,<%=node['hopsworks']['version'].sub("-SNAPSHOT", "")%>
+expat_dir = <%= node['cloud']['init']['expat_dir'] %>
+hive_schematool = <%=node['hive2']['base_dir']%>/bin/schematool
+base_images = <%=node['cloud']['init']['install_dir']%>/<%=File.basename(node['hops']['docker']['base']['download_url'])%>
+tours_cache_base_dir = <%=node["hops"]["cloud_tours_cache"]['base_dir']%>
+tours_cache_info_csv = <%=node["hops"]["cloud_tours_cache"]['info_csv']%>

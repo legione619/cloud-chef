@@ -1,0 +1,8 @@
+dependencies: 
+  - recipe: cloud::default
+    global:  
+      - conda::default
+      - hopsworks::default
+  - recipe: cloud::ndb
+    global:  
+      - cloud::default
