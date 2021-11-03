@@ -8,8 +8,13 @@ include_attribute "hive2"
 include_attribute "onlinefs"
 
 default["cloud"]["install_dir"]                            = node["install"]["dir"].empty? ? "/srv/hops" : node["install"]["dir"]
+# Data volume directories
+default['cloud']['data_volume']['root_dir']                = "#{node['data']['dir']}/cloud"
+default['cloud']['data_volume']['mount-point']             = "/hopsworks_data"
+default['cloud']['data_volume']['ec2init_checks']          = "#{node['cloud']['data_volume']['root_dir']}/ec2init_checks"
+
 default['cloud']['init']['install_dir']                    = '/root'
-default['cloud']['init']['version']                        = '0.10'
+default['cloud']['init']['version']                        = '0.11'
 
 default['cloud']['init']['config']['hosted_zone']          = "cloud.hopsworks.ai"
 default['cloud']['init']['config']['lets_encrypt_dir']     = "/etc/letsencrypt"
