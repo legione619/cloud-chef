@@ -25,9 +25,13 @@ echo 1000 > serial
 openssl genrsa -aes256 -out private/ca.key.pem -passout pass:${PASSWORD} 4096
 chmod 400 private/ca.key.pem
 
-openssl req -subj "/C=SE/ST=Sweden/L=Stockholm/O=SICS/CN=HopsRootCA" \
+#openssl req -subj "/C=SE/ST=Sweden/L=Stockholm/O=SICS/CN=HopsRootCA" \
+#    -passin pass:${PASSWORD} -passout pass:${PASSWORD} -key private/ca.key.pem \
+#    -new -x509 -days 7300 -sha256 -extensions v3_ca -out certs/ca.cert.pem
+openssl req -subj "/C=IT/ST=Italia/L=Roma/O=Almaviva S.P.A./CN=GiottoPlatformRootCA" \
     -passin pass:${PASSWORD} -passout pass:${PASSWORD} -key private/ca.key.pem \
     -new -x509 -days 7300 -sha256 -extensions v3_ca -out certs/ca.cert.pem
+
 
 chmod 444 certs/ca.cert.pem
 
@@ -41,7 +45,10 @@ openssl genrsa -aes256 -out private/intermediate.key.pem -passout pass:${PASSWOR
 chown ${GF_USER}:${GF_GROUP} private/intermediate.key.pem
 chmod 440 private/intermediate.key.pem
 
-openssl req -new -sha256 -subj "/C=SE/ST=Sweden/L=Stockholm/O=SICS/CN=HopsIntermediateCA" \
+#openssl req -new -sha256 -subj "/C=SE/ST=Sweden/L=Stockholm/O=SICS/CN=HopsIntermediateCA" \
+#      -key private/intermediate.key.pem -passin pass:${PASSWORD} \
+#      -passout pass:${PASSWORD} -out csr/intermediate.csr.pem
+openssl req -new -sha256 -subj "/C=IT/ST=Italia/L=Roma/O=Almaviva/CN=GiottoPlatformIntermediateCA" \
       -key private/intermediate.key.pem -passin pass:${PASSWORD} \
       -passout pass:${PASSWORD} -out csr/intermediate.csr.pem
 
