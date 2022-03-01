@@ -21,6 +21,7 @@ rondb_total_memory_config_multiplier = <%= node['cloud']['init']['rondb']['total
 rondb_num_cpus_multiplier = <%= node['cloud']['init']['rondb']['num_cpus_multiplier'] %>
 onlinefs_username = <%= node['onlinefs']['hopsworks']['email'] %>
 onlinefs_token_file = <%= node['onlinefs']['token'] %>
+data_mount_point = <%= node['cloud']['data_volume']['mount-point'] %>
 
 [upgradeplan]
 hops_versions = <%= node['hops']['versions']%>,<%= node['hops']['version'].sub("-SNAPSHOT", "").split("-")[0]%>
@@ -31,3 +32,5 @@ base_images = <%=node['cloud']['init']['install_dir']%>/<%=File.basename(node['h
 tours_cache_base_dir = <%=node["hops"]["cloud_tours_cache"]['base_dir']%>
 tours_cache_info_csv = <%=node["hops"]["cloud_tours_cache"]['info_csv']%>
 onlinefs_image = <%=node['cloud']['init']['install_dir']%>/<%=File.basename(node['onlinefs']['download_url'])%>
+airflow_image = <%=node['cloud']['init']['install_dir']%>/<%=File.basename(node['airflow']['url'])%>
+git_image = <%=node['cloud']['init']['install_dir']%>/<%=File.basename(node['hops']['docker']['git']['download_url'])%>

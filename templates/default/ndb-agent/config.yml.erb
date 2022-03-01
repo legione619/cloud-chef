@@ -2,6 +2,7 @@ general:
   log-level: <%= node['cloud']['ndb-agent']['log-level'] %>
   handler-channel-size: 20
   cluster-topology-location: <%= node['cloud']['ndb-agent']['config'] %>/cluster-topology.json
+  backup-staging-directory: <%= node['ndb']['BackupDataDir'] %>
 
 http:
   listen-port: 8181
@@ -18,7 +19,7 @@ templates:
 
 <% if @template_db_section -%>
 database:
-  address: 127.0.0.1
+  hostname: 127.0.0.1
   username: root
 <% end -%>
 

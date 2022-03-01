@@ -26,6 +26,10 @@ attribute "cloud/init/version",
           :description => "Version of ec2init script",
           :type => 'string'
 
+attribute "cloud/data/mount-point",
+          :description => "Mount point of data volume. Default: /hopsworks_data",
+          :type => 'string'
+
 attribute "cloud/init/config/hosted_zone",
           :description => "Base hopsworks-cloud domain name",
           :type => 'string'
@@ -76,4 +80,8 @@ attribute "cloud/ndb-agent/version",
 
 attribute "cloud/ndb-agent/log-level",
           :description => "Log level of ndb-agent",
+          :type => 'string'
+
+attribute "cloud/metrics/version",
+          :description => "version of the cloud-metrics-collector to install",
           :type => 'string'
